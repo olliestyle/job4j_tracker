@@ -72,3 +72,7 @@ jrebel.lic
 build
 .gradle
 *.pid
+
+# db
+testdb.mv.db
+testdb.trace.db
