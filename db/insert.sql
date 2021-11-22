@@ -1,0 +1,1 @@
+insert into tracker.public.items (name) values ('Murat'), ('Egor'), ('Pavel'), ('Oleg'), ('Anna'), ('Yura'),('Gleb'), ('Vova');
