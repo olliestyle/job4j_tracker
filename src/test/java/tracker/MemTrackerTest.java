@@ -14,7 +14,7 @@ public class MemTrackerTest {
     public void whenAddNewItemThenTrackerHasSameItem() {
         MemTracker memTracker = new MemTracker();
         Item item = new Item("test1");
-        memTracker.add(item);
+        memTracker.addItem(item);
         Item result = memTracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
     }
@@ -23,7 +23,7 @@ public class MemTrackerTest {
     public void whenNotFindById() {
         MemTracker memTracker = new MemTracker();
         Item item = new Item("test1");
-        memTracker.add(item);
+        memTracker.addItem(item);
         Item result = memTracker.findById(1874619823);
         assertThat(result, is(nullValue()));
     }
@@ -32,7 +32,7 @@ public class MemTrackerTest {
     public void whenReplace() {
         MemTracker memTracker = new MemTracker();
         Item bug = new Item("Bug");
-        memTracker.add(bug);
+        memTracker.addItem(bug);
         Integer id = bug.getId();
         Item bugWithDesc = new Item("Bug with description");
         memTracker.replace(id, bugWithDesc);
@@ -51,7 +51,7 @@ public class MemTrackerTest {
     public void whenDelete() {
         MemTracker memTracker = new MemTracker();
         Item bug = new Item("Bug");
-        memTracker.add(bug);
+        memTracker.addItem(bug);
         Integer id = bug.getId();
         memTracker.delete(id);
         assertThat(memTracker.findById(id), is(nullValue()));

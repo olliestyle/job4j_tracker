@@ -14,7 +14,7 @@ public class FindByIDActionTest {
     public void testFindByIdActionTest() {
         Output out = new StubOutput();
         Store tracker = new MemTracker();
-        tracker.add(new Item("FoundById item"));
+        tracker.addItem(new Item("FoundById item"));
         FindByIDAction find = new FindByIDAction(out);
         Input input = mock(Input.class);
         when(input.askInt(any(String.class))).thenReturn(1);

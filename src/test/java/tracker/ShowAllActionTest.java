@@ -18,7 +18,7 @@ public class ShowAllActionTest {
         System.setOut(new PrintStream(out));
         Store memTracker = new MemTracker();
         Item item = new Item("fix bug");
-        memTracker.add(item);
+        memTracker.addItem(item);
         ShowAllAction action = new ShowAllAction();
         action.execute(new StubInput(new String[]{}), memTracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())

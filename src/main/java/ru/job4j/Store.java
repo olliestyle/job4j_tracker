@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Store extends AutoCloseable {
     void init();
-    Item add(Item item);
+    Item addItem(Item item);
     boolean replace(Integer id, Item item);
     boolean delete(Integer id);
     List<Item> findAll();

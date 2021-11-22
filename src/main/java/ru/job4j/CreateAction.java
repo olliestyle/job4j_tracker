@@ -17,7 +17,7 @@ public class CreateAction implements UserAction {
     public boolean execute(Input input, Store store) {
         String name = input.askStr("Enter name:");
         Item item = new Item(name);
-        store.add(item);
+        store.addItem(item);
         return true;
     }
 }

@@ -20,7 +20,7 @@ public class MemTracker implements Store {
      * Метод добавления заявки в хранилище
      * @param item новая заявка
      */
-    public Item add(Item item) {
+    public Item addItem(Item item) {
         item.setId(id++);
         items.add(item);
         return item;

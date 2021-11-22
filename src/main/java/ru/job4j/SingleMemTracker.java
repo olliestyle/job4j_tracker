@@ -22,8 +22,8 @@ public final class SingleMemTracker implements Store {
     }
 
     @Override
-    public Item add(Item item) {
-        return memTracker.add(item);
+    public Item addItem(Item item) {
+        return memTracker.addItem(item);
     }
 
     @Override

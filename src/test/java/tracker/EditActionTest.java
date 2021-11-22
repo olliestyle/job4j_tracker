@@ -14,7 +14,7 @@ public class EditActionTest {
     public void testEditAction() {
         Output out = new StubOutput();
         Store tracker = new MemTracker();
-        tracker.add(new Item("Replaced item"));
+        tracker.addItem(new Item("Replaced item"));
         String replacedName = "New item name";
         EditAction rep = new EditAction(out);
         Input input = mock(Input.class);

@@ -20,10 +20,6 @@ public class SqlTrackerTest {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
-            System.out.println(config.getProperty("url") + " HELLO");
-            System.out.println(config.getProperty("url") + " HELLO");
-            System.out.println(config.getProperty("url") + " HELLO");
-            System.out.println(config.getProperty("url") + " HELLO");
             return DriverManager.getConnection(
                     config.getProperty("url"),
                     config.getProperty("username"),
@@ -38,7 +34,7 @@ public class SqlTrackerTest {
     public void createItem() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
             Item toAdd = new Item("hello");
-            tracker.add(toAdd);
+            tracker.addItem(toAdd);
             assertThat(tracker.findByName("hello").size(), is(1));
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,8 +44,8 @@ public class SqlTrackerTest {
     @Test
     public void whenFindAll() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
-            tracker.add(new Item("aaa"));
-            tracker.add(new Item("bbb"));
+            tracker.addItem(new Item("aaa"));
+            tracker.addItem(new Item("bbb"));
             assertThat(tracker.findAll().size(), is(2));
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,7 +56,7 @@ public class SqlTrackerTest {
     public void whenEditIsGood() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
             Item toAdd = new Item("aaa");
-            tracker.add(toAdd);
+            tracker.addItem(toAdd);
             Item rep = new Item("bbb");
             tracker.replace(toAdd.getId(), rep);
             assertThat(tracker.findById(toAdd.getId()).getName(), is("bbb"));
@@ -73,7 +69,7 @@ public class SqlTrackerTest {
     public void whenDeleteIsGood() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
             Item toDelete = new Item("aaa");
-            tracker.add(toDelete);
+            tracker.addItem(toDelete);
             tracker.delete(toDelete.getId());
             assertThat(tracker.findAll().size(), is(0));
         } catch (Exception e) {
@@ -85,7 +81,7 @@ public class SqlTrackerTest {
     public void whenFindByIdIsGood() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
             Item toAdd = new Item("aaa");
-            tracker.add(toAdd);
+            tracker.addItem(toAdd);
             assertEquals(tracker.findById(toAdd.getId()), toAdd);
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,8 +91,8 @@ public class SqlTrackerTest {
     @Test
     public void whenFindByNameActionisGood() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
-            tracker.add(new Item("aaa"));
-            tracker.add(new Item("aaa"));
+            tracker.addItem(new Item("aaa"));
+            tracker.addItem(new Item("aaa"));
             assertEquals(tracker.findByName("aaa").size(), 2);
         } catch (Exception e) {
             e.printStackTrace();

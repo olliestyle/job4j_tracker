@@ -33,7 +33,7 @@ public class SqlTracker implements Store {
     }
 
     @Override
-    public Item add(Item item) {
+    public Item addItem(Item item) {
         String sqlAdd = "insert into items (name) values (?)";
         try (PreparedStatement ps = connection.prepareStatement(sqlAdd, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, item.getName());

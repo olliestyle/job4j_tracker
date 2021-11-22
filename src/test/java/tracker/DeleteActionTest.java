@@ -15,7 +15,7 @@ public class DeleteActionTest {
     public void testDeleteAction() {
         Output out = new StubOutput();
         Store tracker = new MemTracker();
-        tracker.add(new Item("Deleted item"));
+        tracker.addItem(new Item("Deleted item"));
         DeleteAction del = new DeleteAction(out);
         Input input = mock(Input.class);
         when(input.askStr(any(String.class))).thenReturn("1");
