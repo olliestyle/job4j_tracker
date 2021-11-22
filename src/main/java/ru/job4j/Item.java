@@ -1,8 +1,13 @@
 package ru.job4j;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "items")
 public class Item implements Comparable<Item> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
