@@ -34,13 +34,13 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        String sqlAdd = "insert into tracker.public.items (name) values (?)";
+        String sqlAdd = "insert into trackertest.public.items (name) values (?)";
         try (PreparedStatement ps = connection.prepareStatement(sqlAdd, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, item.getName());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
-            item.setId(rs.getString("id"));
+            item.setId(rs.getInt("id"));
             item.setName(rs.getString("name"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class SqlTracker implements Store {
 
     private int indexOf(int id) {
         int result = -1;
-        String sqlFindId = "select * from tracker.public.items where id = ?";
+        String sqlFindId = "select * from trackertest.public.items where id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sqlFindId)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -64,10 +64,10 @@ public class SqlTracker implements Store {
     }
 
     @Override
-    public boolean replace(String id, Item item) {
+    public boolean replace(Integer id, Item item) {
         int rows = 0;
-        int idToReplace = indexOf(Integer.valueOf(id));
-        String sqlEdit = "update tracker.public.items set name = ? where id = ?";
+        int idToReplace = indexOf(id);
+        String sqlEdit = "update trackertest.public.items set name = ? where id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sqlEdit)) {
             ps.setString(1, item.getName());
             ps.setInt(2, idToReplace);
@@ -79,10 +79,10 @@ public class SqlTracker implements Store {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Integer id) {
         int rows = 0;
-        int idToDelete = indexOf(Integer.parseInt(id));
-        String sqlDelete = "delete from tracker.public.items where id = ?";
+        int idToDelete = indexOf(id);
+        String sqlDelete = "delete from trackertest.public.items where id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sqlDelete)) {
             ps.setInt(1, idToDelete);
             rows = ps.executeUpdate();
@@ -95,12 +95,12 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findAll() {
         List<Item> result = new ArrayList<>();
-        String sqlFindAll = "select * from tracker.public.items";
+        String sqlFindAll = "select * from trackertest.public.items";
         try (PreparedStatement ps = connection.prepareStatement(sqlFindAll)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Item item = new Item();
-                item.setId(String.valueOf(rs.getInt("id")));
+                item.setId(rs.getInt("id"));
                 item.setName(rs.getString("name"));
                 result.add(item);
             }
@@ -113,13 +113,13 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
-        String sqlFindByName = "select * from tracker.public.items where name = ?";
+        String sqlFindByName = "select * from trackertest.public.items where name = ?";
         try (PreparedStatement ps = connection.prepareStatement(sqlFindByName)) {
             ps.setString(1, key);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Item item = new Item();
-                item.setId(String.valueOf(rs.getInt("id")));
+                item.setId(rs.getInt("id"));
                 item.setName(rs.getString("name"));
                 result.add(item);
             }
@@ -130,16 +130,16 @@ public class SqlTracker implements Store {
     }
 
     @Override
-    public Item findById(String id) {
+    public Item findById(Integer id) {
         Item itemToFind = null;
-        int idToFind = indexOf(Integer.parseInt(id));
-            String sqlEdit = "select * from tracker.public.items where id = ?";
+        int idToFind = indexOf(id);
+            String sqlEdit = "select * from trackertest.public.items where id = ?";
             try (PreparedStatement ps = connection.prepareStatement(sqlEdit)) {
                 ps.setInt(1, idToFind);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     itemToFind = new Item();
-                    itemToFind.setId(String.valueOf(rs.getInt("id")));
+                    itemToFind.setId(rs.getInt("id"));
                     itemToFind.setName(rs.getString("name"));
                 }
             } catch (SQLException e) {

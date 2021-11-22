@@ -17,7 +17,7 @@ public class FindByIDAction implements UserAction {
     public boolean execute(Input input, Store store) {
         output.println(name());
         String id = input.askStr("Enter id of item to find");
-        Item item = store.findById(id);
+        Item item = store.findById(Integer.parseInt(id));
         if (item == null) {
             output.println("There is no item with this id " + id);
         } else {

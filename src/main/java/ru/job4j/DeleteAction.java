@@ -17,7 +17,7 @@ public class DeleteAction implements UserAction {
     public boolean execute(Input input, Store store) {
         output.println(name());
         String id = input.askStr("Enter id of item to delete");
-        boolean canBeDeleted = store.delete(id);
+        boolean canBeDeleted = store.delete(Integer.parseInt(id));
         if (canBeDeleted) {
             output.println("Item was deleted");
         } else {

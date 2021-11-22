@@ -37,17 +37,17 @@ public final class SingleMemTracker implements Store {
     }
 
     @Override
-    public Item findById(String id) {
+    public Item findById(Integer id) {
         return memTracker.findById(id);
     }
 
     @Override
-    public boolean replace(String id, Item item) {
+    public boolean replace(Integer id, Item item) {
         return memTracker.replace(id, item);
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Integer id) {
         return memTracker.delete(id);
     }
 

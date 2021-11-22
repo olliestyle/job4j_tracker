@@ -21,7 +21,7 @@ public class MemTracker implements Store {
      * @param item новая заявка
      */
     public Item add(Item item) {
-        item.setId(String.valueOf(id++));
+        item.setId(id++);
         items.add(item);
         return item;
     }
@@ -51,7 +51,7 @@ public class MemTracker implements Store {
         return  itemsFinded;
     }
 
-    public Item findById(String id) {
+    public Item findById(Integer id) {
         int indexOf = indexOf(id);
         if (indexOf == -1) {
             return null;
@@ -60,7 +60,7 @@ public class MemTracker implements Store {
         }
     }
 
-    private int indexOf(String id) {
+    private int indexOf(Integer id) {
         int rsl = -1;
         for (int index = 0; index < items.size(); index++) {
             if (items.get(index).getId().equals(id)) {
@@ -71,7 +71,7 @@ public class MemTracker implements Store {
         return rsl;
     }
 
-    public boolean replace(String id, Item item) {
+    public boolean replace(Integer id, Item item) {
         int indexOfItemToReplace = indexOf(id);
         if (indexOfItemToReplace == -1) {
             return false;
@@ -82,7 +82,7 @@ public class MemTracker implements Store {
         }
     }
 
-    public boolean delete(String id) {
+    public boolean delete(Integer id) {
         int indexOfItemToDelete = indexOf(id);
         if (indexOfItemToDelete == -1) {
             return false;

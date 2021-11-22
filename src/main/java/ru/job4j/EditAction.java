@@ -18,7 +18,7 @@ public class EditAction implements UserAction {
         output.println(name());
         int id = input.askInt("Enter id of item to edit");
         String name = input.askStr("Set new name: ");
-        boolean canBeReplaced = store.replace(String.valueOf(id), new Item(name));
+        boolean canBeReplaced = store.replace(id, new Item(name));
         if (canBeReplaced) {
             output.println("Item was edited");
         } else {

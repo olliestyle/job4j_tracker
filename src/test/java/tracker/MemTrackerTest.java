@@ -24,7 +24,7 @@ public class MemTrackerTest {
         MemTracker memTracker = new MemTracker();
         Item item = new Item("test1");
         memTracker.add(item);
-        Item result = memTracker.findById("1874619823749");
+        Item result = memTracker.findById(1874619823);
         assertThat(result, is(nullValue()));
     }
 
@@ -33,7 +33,7 @@ public class MemTrackerTest {
         MemTracker memTracker = new MemTracker();
         Item bug = new Item("Bug");
         memTracker.add(bug);
-        String id = bug.getId();
+        Integer id = bug.getId();
         Item bugWithDesc = new Item("Bug with description");
         memTracker.replace(id, bugWithDesc);
         assertThat(memTracker.findById(id).getName(), is("Bug with description"));
@@ -43,8 +43,8 @@ public class MemTrackerTest {
     public void whenReplaceNull() {
         MemTracker memTracker = new MemTracker();
         Item bugWithDesc = new Item("Bug with description");
-        memTracker.replace("5648941561", bugWithDesc);
-        assertThat(memTracker.replace("5648941561", bugWithDesc), is(false));
+        memTracker.replace(564894156, bugWithDesc);
+        assertThat(memTracker.replace(564894156, bugWithDesc), is(false));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class MemTrackerTest {
         MemTracker memTracker = new MemTracker();
         Item bug = new Item("Bug");
         memTracker.add(bug);
-        String id = bug.getId();
+        Integer id = bug.getId();
         memTracker.delete(id);
         assertThat(memTracker.findById(id), is(nullValue()));
     }
@@ -60,6 +60,6 @@ public class MemTrackerTest {
     @Test
     public void whenDeleteNothing() {
         MemTracker memTracker = new MemTracker();
-        assertThat(memTracker.delete("5498131564"), is(false));
+        assertThat(memTracker.delete(549813156), is(false));
     }
 }
