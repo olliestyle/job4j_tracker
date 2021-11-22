@@ -20,10 +20,7 @@ public class SqlTrackerTest {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
-            System.out.println(config.getProperty("url"));
-            System.out.println(config.getProperty("url"));
-            System.out.println(config.getProperty("url"));
-            System.out.println(config.getProperty("url"));
+            System.out.println(config.getProperty("url") + "LOGURL");
             return DriverManager.getConnection(
                     config.getProperty("url"),
                     config.getProperty("username"),
