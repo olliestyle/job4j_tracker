@@ -38,10 +38,11 @@ public class SqlTracker implements Store {
         try (PreparedStatement ps = connection.prepareStatement(sqlAdd, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, item.getName());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            item.setId(rs.getInt("id"));
-            item.setName(rs.getString("name"));
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    item.setId(rs.getInt("id"));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
