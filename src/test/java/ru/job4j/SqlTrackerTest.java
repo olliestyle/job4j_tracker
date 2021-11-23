@@ -1,8 +1,5 @@
-package tracker;
+package ru.job4j;
 
-import ru.job4j.ConnectionRollback;
-import ru.job4j.Item;
-import ru.job4j.SqlTracker;
 import org.junit.Test;
 
 import java.io.InputStream;

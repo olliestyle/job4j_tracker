@@ -1,7 +1,5 @@
-package tracker;
+package ru.job4j;
 
-import ru.job4j.Item;
-import ru.job4j.MemTracker;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;

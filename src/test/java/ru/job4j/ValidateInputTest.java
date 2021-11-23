@@ -1,7 +1,5 @@
-package tracker;
+package ru.job4j;
 
-import ru.job4j.StubInput;
-import ru.job4j.ValidateInput;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
