@@ -90,11 +90,9 @@ public class Item implements Comparable<Item> {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", created=" + created +
-                '}';
+        return "Item{" + "id=" + id
+                + ", name='" + name + '\''
+                + ", description='" + description + '\''
+                + ", created=" + created + '}';
     }
 }
