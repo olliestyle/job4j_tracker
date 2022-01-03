@@ -29,32 +29,29 @@ public class HbmTracker implements Store {
 
     @Override
     public boolean replace(Integer id, Item item) {
-        boolean isReplaced = false;
-        if (findById(id) != null) {
-            item.setId(id);
-            Session session = sf.openSession();
-            session.beginTransaction();
-            session.merge(item);
-            session.getTransaction().commit();
-            session.close();
-            isReplaced = true;
-        }
-        return isReplaced;
+        String query = "update Item set name = :name, description = :description, created = :created where id = :id";
+        Session session = sf.openSession();
+        session.beginTransaction();
+        int updated = session.createQuery(query)
+                    .setParameter("name", item.getName())
+                    .setParameter("description", item.getDescription())
+                    .setParameter("created", item.getCreated())
+                    .setParameter("id", id)
+                    .executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return updated > 0;
     }
 
     @Override
     public boolean delete(Integer id) {
-        boolean isDelete = false;
-        Item toDelete = findById(id);
-        if (toDelete != null) {
-            Session session = sf.openSession();
-            session.beginTransaction();
-            session.delete(toDelete);
-            session.getTransaction().commit();
-            session.close();
-            isDelete = true;
-        }
-        return isDelete;
+        String query = "delete Item where id = :id";
+        Session session = sf.openSession();
+        session.beginTransaction();
+        int updated = session.createQuery(query).setParameter("id", id).executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return updated > 0;
     }
 
     @Override
