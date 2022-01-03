@@ -21,7 +21,6 @@ public class SqlTracker implements Store {
         this.connection = connection;
     }
 
-    @Override
     public void init() {
          try {
              DatabaseMetaData metaData = connection.getMetaData();
