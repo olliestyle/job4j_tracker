@@ -1,5 +1,7 @@
 package ru.job4j;
 
+import ru.job4j.model.Observable;
+
 import java.util.List;
 
 public final class SingleMemTracker implements Store {
@@ -28,6 +30,11 @@ public final class SingleMemTracker implements Store {
     @Override
     public List<Item> findAll() {
         return memTracker.findAll();
+    }
+
+    @Override
+    public void findAllByReact(Observable<Item> observable) {
+
     }
 
     @Override

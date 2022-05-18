@@ -34,6 +34,15 @@ public class Item implements Comparable<Item> {
         return item;
     }
 
+    public static Item of(Integer id, String name, String description, Timestamp created) {
+        Item item = new Item();
+        item.id = id;
+        item.name = name;
+        item.description = description;
+        item.created = created;
+        return item;
+    }
+
     public Integer getId() {
         return id;
     }

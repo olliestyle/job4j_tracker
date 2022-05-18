@@ -56,6 +56,7 @@ public class StartUI {
             List<UserAction> actions = new ArrayList<>();
             actions.add(new CreateAction(output));
             actions.add(new ShowAllAction());
+            actions.add(new ShowAllByReactAction());
             actions.add(new EditAction(output));
             actions.add(new DeleteAction(output));
             actions.add(new FindByIDAction(output));

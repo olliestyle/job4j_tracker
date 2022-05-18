@@ -1,5 +1,7 @@
 package ru.job4j;
 
+import ru.job4j.model.Observable;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,15 +101,36 @@ public class SqlTracker implements Store {
         try (PreparedStatement ps = connection.prepareStatement(sqlFindAll)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                Thread.sleep(1000);
                 Item item = new Item();
                 item.setId(rs.getInt("id"));
                 item.setName(rs.getString("name"));
                 result.add(item);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public void findAllByReact(Observable<Item> observable) {
+        String sqlFindAll = "select * from items";
+        try (PreparedStatement ps = connection.prepareStatement(sqlFindAll)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Thread.sleep(1000);
+                observable.notifyObservers(
+                        Item.of(
+                                rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getString("description"),
+                                rs.getTimestamp("created"))
+                );
+            }
+        } catch (SQLException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

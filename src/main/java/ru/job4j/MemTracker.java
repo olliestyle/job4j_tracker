@@ -1,5 +1,7 @@
 package ru.job4j;
 
+import ru.job4j.model.Observable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,6 +39,11 @@ public class MemTracker implements Store {
 
     public List<Item> findAll() {
         return items;
+    }
+
+    @Override
+    public void findAllByReact(Observable<Item> observable) {
+
     }
 
     @Override

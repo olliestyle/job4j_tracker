@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import ru.job4j.model.Observable;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -64,6 +65,11 @@ public class HbmTracker implements Store {
         session.getTransaction().commit();
         session.close();
         return allItems;
+    }
+
+    @Override
+    public void findAllByReact(Observable<Item> observable) {
+
     }
 
     @Override
